@@ -2,12 +2,12 @@ from core.vector_backends.chroma_store import ChromaVectorStore
 from uuid import uuid4
 import os
 import pytest
-from utils.config import load_config
+from core.utils.config import load_config
 
 from core.registries.vector_registry import get_vector_db
 from core.registries.embedding_registry import get_embedder
 from core.registries.llm_registry import get_llm
-from utils.prompt_loader import load_prompt_template
+from core.utils.prompt_loader import load_prompt_template
 
 from core.llm_providers.openai_llm import OpenAIChatModel
 from core.vector_backends.chroma_store import ChromaVectorStore
@@ -20,8 +20,8 @@ openai_key = os.getenv("OPENAI_API_KEY")
 def test_add_and_retrieve():
   CONFIG = load_config()
 
-  embedder = get_embedder(config["embedding"]["provider"])
-  vector_store = get_vector_db(config["vector_store"]["provider"], embedder=embedder)
+  embedder = get_embedder(CONFIG["embedding"]["provider"])
+  vector_store = get_vector_db(CONFIG["vector_store"]["provider"], embedder=embedder)
   vs = vector_store
   vs.add_message("user", "Artificial Intelligence is changing the world.")
   results = vs.get_top_k("What is changing the world?")
