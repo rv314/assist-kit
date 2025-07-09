@@ -2,7 +2,8 @@
   "llm": {
     "provider": "openai",
     "model": "gpt-3.5-turbo",
-    "available_models": ["gpt-3.5-turbo", "gpt-4"]
+    "available_models": ["gpt-3.5-turbo", "gpt-4"],
+    "welcome_message": "Hello! I'm, AssistKit. How can I help you today?"
   },
   "embedding": {
     "provider": "openai"
@@ -15,5 +16,9 @@
     "debug": false,
     "log_dir": "logs"
   },
-  "max_tokens": 3000
+  "max_tokens": 3000,
+  "avatars":  {
+    "user": "https://cdn-icons-png.flaticon.com/512/1077/1077012.png",
+    "assistant": "https://cdn-icons-png.flaticon.com/512/4712/4712027.png"
+  }
 }
