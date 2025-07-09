@@ -1,17 +1,17 @@
 # assistant/chat_client.py
-from utils.token_limits import trim_messages
+from core.utils.token_limits import trim_messages
 from typing import List, Dict
-from utils.debug import debug_log, print_eval_log, print_vector_results
-from utils.evaluation_logger import log_eval
+from core.utils.debug import debug_log, print_eval_log, print_vector_results
+from core.utils.evaluation_logger import log_eval
 
-from registries.vector_registry import get_vector_db
-from registries.embedding_registry import get_embedder
-from registries.llm_registry import get_llm
-from utils.prompt_loader import load_prompt_template
+from core.registries.vector_registry import get_vector_db
+from core.registries.embedding_registry import get_embedder
+from core.registries.llm_registry import get_llm
+from core.utils.prompt_loader import load_prompt_template
 
-from llm_providers.openai_llm import OpenAIChatModel
-from vector_backends.chroma_store import ChromaVectorStore
-from embedding_models.openai_embedder import OpenAIEmbedder
+from core.llm_providers.openai_llm import OpenAIChatModel
+from core.vector_backends.chroma_store import ChromaVectorStore
+from core.embedding_models.openai_embedder import OpenAIEmbedder
 
 
 class ChatEngine:

@@ -1,7 +1,7 @@
 import openai
 import os
 from dotenv import load_dotenv
-from registries.llm_registry import register_llm
+from core.registries.llm_registry import register_llm
 
 load_dotenv()
 

@@ -1,5 +1,5 @@
 from langchain_community.embeddings import OpenAIEmbeddings
-from registries.embedding_registry import register_embedder
+from core.registries.embedding_registry import register_embedder
 import os
 
 @register_embedder("openai")

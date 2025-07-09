@@ -1,5 +1,5 @@
 import os
-from utils.evaluation_logger import parse_qa
+from core.utils.evaluation_logger import parse_qa
 
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 

@@ -1,8 +1,8 @@
 from chromadb import PersistentClient
 from chromadb.config import Settings
 from pathlib import Path
-from registries.vector_registry import register_vector_db
-from utils.config import load_config
+from core.registries.vector_registry import register_vector_db
+from core.utils.config import load_config
 
 
 @register_vector_db("chroma")
