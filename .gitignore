@@ -210,3 +210,4 @@ documents/uploads/*
 documents/processed/*
 .nicegui
 logs/*
+vectors/*
