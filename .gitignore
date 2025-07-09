@@ -209,3 +209,4 @@ __marimo__/
 documents/uploads/*
 documents/processed/*
 .nicegui
+logs/*
