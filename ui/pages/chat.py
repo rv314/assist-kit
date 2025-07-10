@@ -2,6 +2,8 @@ from nicegui import ui
 from core.engine.chat_client import ChatEngine
 from core.utils.config import load_config
 from datetime import datetime
+from core.engine.session_manager import SessionManager
+import uuid
 
 # TODO:
 # 1. Dialog instead of drop-down for model selection
@@ -17,6 +19,8 @@ class AssistKit():
     self.input_box = None
     self.model_selector = None
     self.AVATARS = self.config.get("avatars")
+    self.session_manager = SessionManager(config=self.config.get("session_store", {}))
+    self.session_id = str(uuid.uuid4()) # temporary session id until login feature is implemented
 
     self.render()
 
@@ -45,6 +49,10 @@ class AssistKit():
     def start_chat(selected_model):
       self.config["llm"]["model"] = selected_model
       self.chat_engine = ChatEngine(config=self.config)
+      
+      # Load previous session messages if available
+      session_data = self.session_manager.load_session(self.session_id) or []
+      self.messages = session_data.get("messages", []) if session_data else []
   
       def send_message():
         user_text = self.input_box.value.strip()
@@ -75,6 +83,7 @@ class AssistKit():
         def get_response():
           response = self.chat_engine.chat(self.messages)
           self.messages.append({"role": "assistant", "content": response})
+          self.session_manager.save_session(self.session_id, self.messages)
 
           assistant_container.clear()
           with assistant_container:
