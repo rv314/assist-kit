@@ -20,5 +20,11 @@
   "avatars":  {
     "user": "https://cdn-icons-png.flaticon.com/512/1077/1077012.png",
     "assistant": "https://cdn-icons-png.flaticon.com/512/4712/4712027.png"
+  },
+  "session_store": {
+    "provider": "json",
+    "config": {
+      "json_path": "session_data/session_data.json"
+    }
   }
 }
