@@ -211,3 +211,4 @@ documents/processed/*
 .nicegui
 logs/*
 vectors/*
+TODO.md
