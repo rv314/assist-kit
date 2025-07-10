@@ -4,6 +4,7 @@ _SESSION_REGISTRY = {}
 
 def register_session_backend(name: str):
   def wrapper(cls: Callable):
+    print(f"Registering session backend: {name}")
     _SESSION_REGISTRY[name] = cls
     return cls
   return wrapper
