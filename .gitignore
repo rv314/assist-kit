@@ -212,3 +212,4 @@ documents/processed/*
 logs/*
 vectors/*
 TODO.md
+session_data/*
