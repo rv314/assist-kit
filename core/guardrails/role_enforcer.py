@@ -13,7 +13,17 @@ class RoleEnforcer:
     blocked = role_rules.get("blocked_topics", [])
 
     for topic in blocked:
-      if topic.lower() is user_input.lower():
+      if topic.lower() in user_input.lower(): # Replace with NLP-based matching (embedding similarity)
         return False
       
     return True
+  
+
+  def check(self, user_input: str) -> dict:
+    if self.is_in_scope(user_input):
+      return {"allowed": True}
+    return {
+      "allowed": False,
+      "reason": "scope_violation",
+      "details": f"Input not allowed in current scope: '{self.scope}'."
+    }
