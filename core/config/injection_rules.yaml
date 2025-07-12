@@ -1,0 +1,13 @@
+injection_detector:
+  enabled: true
+  suspicious_patterns:
+  - "(?i)ignore.*previous.*instructions"
+  - "(?i)disregard.*above.*rules"
+  - "(?i)act as.*system"
+  - "(?i)pretend.*you.*are.*not.*assistant"
+  - "(?i)you are not bound by"
+  - "(?i)you must comply"
+  - "(?i)forget.*your.*prior.*instructions"
+  - "(?i)write a prompt that.*"
+  - "(?i)jailbreak"
+  - "(?i)simulate a developer mode"
