@@ -36,6 +36,14 @@
         "allowed_keywords": ["drug", "protein", "clinical", "compound", "pathway"],
         "blocked_topics": ["politics", "movies", "sports"]
       }
-    }
+    },
+    "abuse_filter": {
+      "blocklist": ["hate", "kill", "suicide", "drug abuse", "stupid", "racist"]
+    },
+    "rate_limiter": {
+      "max_requests": 5,
+      "time_window": 60
+    },
+    "enable_injection_detector": true
   }
 }
