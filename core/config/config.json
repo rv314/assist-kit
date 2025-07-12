@@ -3,7 +3,8 @@
     "provider": "openai",
     "model": "gpt-3.5-turbo",
     "available_models": ["gpt-3.5-turbo", "gpt-4"],
-    "welcome_message": "Hello! I'm, AssistKit. How can I help you today?"
+    "welcome_message": "Hello! I'm, AssistKit. How can I help you today?",
+    "scope": "general"
   },
   "embedding": {
     "provider": "openai"
@@ -25,6 +26,16 @@
     "provider": "json",
     "config": {
       "json_path": "session_data/session_data.json"
+    }
+  },
+  "guardrails": {
+    "enabled": true,
+    "enforce_scope": false,
+    "role_definitions": {
+      "life_sciences": {
+        "allowed_keywords": ["drug", "protein", "clinical", "compound", "pathway"],
+        "blocked_topics": ["politics", "movies", "sports"]
+      }
     }
   }
 }
