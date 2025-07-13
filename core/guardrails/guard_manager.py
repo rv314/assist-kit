@@ -42,7 +42,7 @@ class GuardManager:
       if not res.get("allowed", True):
         reason = res.get("reason", "unknown")
         details = res.get("details", "")
-        friendly_message = reason_map(reason, reason_map["unknown"])
+        friendly_message = reason_map.get(reason, reason_map["unknown"])
         messages.append(f"❌ {name}: {friendly_message}" + (f"\n→ {details}" if details else ""))
 
     return "\n\n".join(messages)
