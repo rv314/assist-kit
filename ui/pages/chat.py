@@ -3,6 +3,7 @@ from core.engine.chat_client import ChatEngine
 from core.utils.config import load_config
 from datetime import datetime
 from core.engine.session_manager import SessionManager
+from core.guardrails.guard_manager import GuardManager
 import uuid
 
 # TODO:
@@ -20,6 +21,7 @@ class AssistKit():
     self.model_selector = None
     self.AVATARS = self.config.get("avatars")
     self.session_manager = SessionManager(config=self.config.get("session_store", {}))
+    self.guard_manager = GuardManager(self.config)
     self.session_id = str(uuid.uuid4()) # temporary session id until login feature is implemented
 
     self.render()
@@ -58,6 +60,15 @@ class AssistKit():
         user_text = self.input_box.value.strip()
         if not user_text:
           return
+        
+        # Guardrails check
+        guard_result = self.guard_manager.check_all(user_text, session_id=self.session_id)
+        if not guard_result["allowed"]:
+          
+          with self.chat_area:
+            with ui.row().classes("justify-start w-full"):
+              ui.chat_message(f"Blocked: {guard_result['reason']}\n{guard_result['details', '']}", name="GuardRails").props("bg-color=red-1 text-red")
+              ui.label(timestamp).classes("text-xs text-gray-400 ml-2 mt-1")
       
         timestamp = datetime.now().strftime("%H:%M")
         # Show user message
