@@ -62,14 +62,15 @@ class AssistKit():
           return
         
         # Guardrails check
-        guard_result = self.guard_manager.check_all(user_text, session_id=self.session_id)
-        if not guard_result["allowed"]:
-          
+        results = self.guard_manager.get_all_guard_results(user_text, session_id=self.session_id)
+        if not results["allowed"]:
+          guard_message = self.guard_manager.guard_results_handler(results)
           with self.chat_area:
             with ui.row().classes("justify-start w-full"):
-              ui.chat_message(f"Blocked: {guard_result['reason']}\n{guard_result['details', '']}", name="GuardRails").props("bg-color=red-1 text-red")
-              ui.label(timestamp).classes("text-xs text-gray-400 ml-2 mt-1")
-      
+              ui.chat_message(f"  {guard_message}", name="GuardRails").props("bg-color=red-1 text-red")
+              ui.label(datetime.now().strftime("%H:%M")).classes("text-xs text-gray-400 ml-2 mt-1")
+          return
+
         timestamp = datetime.now().strftime("%H:%M")
         # Show user message
         with self.chat_area:    
