@@ -9,14 +9,14 @@ class InjectionDetector:
     self.suspicious_patterns = self.rules.get("injection_detector", {}).get("suspicious_patterns", [])
 
 
-  def is_safe(self, user_input: str) -> bool:
+  def is_safe(self, user_input: str):
     if not self.enabled:
       return True
     
     for pattern in self.suspicious_patterns:
-      if re.search(pattern, user_input):
+      if re.search(pattern, user_input, re.IGNORECASE):
         return (False, pattern)
-    return True
+    return (True, None)
   
 
   def check(self, user_input: str) -> dict:
