@@ -26,17 +26,17 @@ class JSONSessionStore:
   
   def load_session(self, session_id: str) -> list:
     data = self._read()
-    return data.get(session_id, [])
+    return data.get(str(session_id), [])
   
 
   def save_session(self, session_id: str, messages: list):
     data = self._read()
-    data[session_id] = messages
+    data[str(session_id)] = messages
     self._write(data)
 
 
   def clear_session(self, session_id: str):
     data = self._read()
     if session_id in data:
-      del data[session_id]
+      del data[str(session_id)]
       self._write(data)
