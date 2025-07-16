@@ -48,7 +48,7 @@ class ChromaVectorStore():
        self.collection.add(documents=texts, ids=ids, embeddings=embeddings, metadatas=metadatas)
 
   
-  def similarity_search(self, query: str, top_k: int = 3):
+  def similarity_search(self, query: str, top_k: int = 3, similarity_threshold: float = 0.3):
     embedding = self.embedder.embed_query(query)
     results = self.collection.query(
       query_embeddings=[embedding], 
@@ -67,6 +67,7 @@ class ChromaVectorStore():
         "metadata": meta
       }
       for doc, dist, meta in zip(documents, distances, metadatas)
+      if dist <= similarity_threshold
     ]
   
 
