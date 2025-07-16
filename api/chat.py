@@ -18,7 +18,7 @@ app = FastAPI()
 app.include_router(router)
 
 config = load_config()
-chat_engine = ChatEngine(config=config)
+chat_engine = ChatEngine(config=config, collection_name="chat_logs")
 session_manager = SessionManager(config)
 guard_manager = GuardManager(config)
 
