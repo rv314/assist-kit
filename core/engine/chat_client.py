@@ -10,13 +10,13 @@ from core.registries.llm_registry import get_llm
 from core.utils.prompt_loader import load_prompt_template
 
 from core.llm_providers.openai_llm import OpenAIChatModel
-from core.vector_backends.chroma_store import ChromaVectorStore
+from core.engine.vector_store import VectorStore
 from core.embedding_models.openai_embedder import OpenAIEmbedder
 
 
 class ChatEngine:
   # TODO: decouple LLM API from ChatEngine
-  def __init__(self, config: dict):
+  def __init__(self, config: dict, collection_name: str = "chat_logs"):
     self.model = config["llm"]["model"]
     self.max_tokens = config.get("max_tokens", 3000)
     self.debug = config.get("logging", {}).get("debug", False)
@@ -26,14 +26,18 @@ class ChatEngine:
 
     # Register embedder and vector store
     embedder = get_embedder(config["embedding"]["provider"])
-    vector_store = get_vector_db(config["vector_store"]["provider"], embedder=embedder)
+    vector_store = VectorStore(
+      full_config=config, 
+      collection_name=collection_name,
+      embedder=embedder
+      )
     self.vector_store = vector_store
   
 
   def get_context(self, query: str, k: int = 3):
     """Retrieve top-k similar Q&A from vector store to dynamically use as context in system prompt."""
-    context_results = self.vector_store.get_top_k(query, k)
-    context_text = "\n---\n".join([doc for doc, _ in context_results]) if context_results else ""
+    context_results = self.vector_store.similarity_search(query, k)
+    context_text = "\n---\n".join([doc["text"] for doc in context_results]) if context_results else ""
     return context_text, context_results
   
   
@@ -80,6 +84,6 @@ class ChatEngine:
       print_eval_log(user_input, context_results, reply)
 
     # Step 7. Add messages to vector DB
-    self.vector_store.add_message(user_input, reply)
+    self.vector_store.log_chat_qa(user_input, reply)
 
     return reply
