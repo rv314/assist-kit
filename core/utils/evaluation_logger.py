@@ -25,7 +25,8 @@ def log_eval(query, context_results, response):
     "timestamp": datetime.now().isoformat(),
     "query": query,
     "top_k_context": [
-      {**parse_qa(doc), "score": score} for doc, score in context_results
+      {**parse_qa(entry["text"]), "score": entry["score"]}
+      for entry in context_results
     ],
     "response": response,
     "context_used": bool(context_results)
