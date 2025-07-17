@@ -6,7 +6,7 @@ from typing import Optional, Annotated
 from uuid import UUID, uuid4
 from bleach import clean
 
-from core.engine.chat_client import ChatEngine
+from core.engine.orchestrator import ChatEngine
 from core.utils.config import load_config
 from core.engine.session_manager import SessionManager
 from core.guardrails.guard_manager import GuardManager

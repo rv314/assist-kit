@@ -1,6 +1,6 @@
 # tests/test_chat_client.py
 
-from core.engine.chat_client import chat
+from core.engine.orchestrator import chat
 import pytest
 import os
 

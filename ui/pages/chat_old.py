@@ -1,5 +1,5 @@
 from nicegui import ui
-from core.engine.chat_client import ChatEngine
+from core.engine.orchestrator import ChatEngine
 from core.utils.config import load_config
 from datetime import datetime
 
