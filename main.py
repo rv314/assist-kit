@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from nicegui import app as nicegui_app, ui
-from ui.pages import chat
+from ui.pages.chat import Chat
 from api.chat import router as chat_router
 
 
-chat.AssistKit()
+Chat()
 
 # FastAPI backend
 app = FastAPI()
