@@ -9,7 +9,7 @@ import requests
 # 2. Dark mode / Theme global setting
 # 3. Welcome message by assistant and current setup/prompt
 
-class AssistKit():
+class Chat():
   def __init__(self):
     self.config = load_config()
     self.messages = []
