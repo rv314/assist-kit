@@ -1,6 +1,6 @@
 from nicegui import ui, app
 from ui.pages import chat, home, rag
-from ui.pages.chat import AssistKit
+from ui.pages.chat import Chat
 
 dark_mode_state = None
 
@@ -19,7 +19,7 @@ def route_home():
 
 @ui.page("/chat")
 def route_chat():
-    AssistKit()
+    Chat()
 
 @ui.page("/rag")
 def route_rag():
