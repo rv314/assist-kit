@@ -6,7 +6,7 @@ from typing import Optional, Annotated
 from uuid import UUID, uuid4
 from bleach import clean
 
-from core.engine.orchestrator import ChatEngine
+from core.engine.chat_engine import ChatEngine
 from core.utils.config import load_config
 from core.engine.session_manager import SessionManager
 from core.guardrails.guard_manager import GuardManager
@@ -18,7 +18,7 @@ app = FastAPI()
 app.include_router(router)
 
 config = load_config()
-chat_engine = ChatEngine(config=config, collection_name="chat_logs")
+chat_engine = ChatEngine(config=config)
 session_manager = SessionManager(config)
 guard_manager = GuardManager(config)
 
@@ -71,7 +71,7 @@ def chat(request: ChatRequest):
   messages.append({"role": "user", "content": message})
 
   # Call chat engine
-  reply = chat_engine.chat(messages)
+  reply = chat_engine.run(messages)
   # print(f" Assistant response: {reply}")
   messages.append({"role": "assistant", "content" : reply})
 
