@@ -1,6 +1,6 @@
 from core.utils.pdf_loader import extract_pdf_text
 from core.engine.orchestrator import InteractionEngine
-from typing import List
+from typing import List, Dict
 
 
 class RAGEngine(InteractionEngine):
@@ -30,5 +30,13 @@ class RAGEngine(InteractionEngine):
     context = "\n\n".join(retrieved_texts)
     prompt = f"Answer the question based on following content:\n\n{context}\n\nQuestion: {user_input}"
 
-    response = self.llm(prompt)
+    response = self.llm.chat(prompt)
     return response
+  
+
+  def run(self, messages: List[Dict[str, str]]) -> str:
+    """Fallback default implementation using latest user input as query."""
+    if not messages:
+      return "No messages provided"
+    user_input = messages[-1]["content"]
+    return self.query(user_input)
