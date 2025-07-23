@@ -1,14 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from nicegui import app as nicegui_app, ui
-from ui.pages.chat import Chat
 from api.chat import router as chat_router
-
-
-Chat()
+from api.rag import router as rag_router
 
 # FastAPI backend
 app = FastAPI()
+
 
 # Enable CORS
 app.add_middleware(
@@ -19,4 +16,6 @@ app.add_middleware(
   allow_headers=["*"],
 )
 
+# Mount backend API routers to NiceGUI FastAPI app
 app.include_router(chat_router, prefix="/api")
+app.include_router(rag_router, prefix="/api")
