@@ -1,6 +1,7 @@
 from core.utils.pdf_loader import extract_pdf_text
 from core.engine.orchestrator import InteractionEngine
 from typing import List, Dict
+from uuid import uuid4
 
 
 class RAGEngine(InteractionEngine):
@@ -11,11 +12,19 @@ class RAGEngine(InteractionEngine):
   def ingest_pdf(self, file_path: str) -> List[str]:
     """Extracts text chunks from PDF and strores embeddings in vector DB."""
     docs = extract_pdf_text(file_path)
-    texts = [doc["text"] for doc in docs]
-    metadata = [doc["metadata"] for doc in docs]
-    self.vector_store.add_documents(texts, metadata)
 
-    return texts
+    chunks = [
+      {
+        "id": str(uuid4()),
+        "text": doc["text"],
+        "metadata": doc["metadata"]
+      }
+      for doc in docs
+    ]
+
+    self.vector_store.add_documents(chunks)
+
+    return [chunk["texts"] for chunk in chunks]
   
 
   def query(self, user_input: str, top_k: int = 3) -> str:
