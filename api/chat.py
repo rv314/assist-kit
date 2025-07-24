@@ -13,9 +13,7 @@ from core.guardrails.guard_manager import GuardManager
 
 
 router = APIRouter()
-
 app = FastAPI()
-app.include_router(router)
 
 config = load_config()
 chat_engine = ChatEngine(config=config)
