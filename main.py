@@ -2,6 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.chat import router as chat_router
 from api.rag import router as rag_router
+import logging
+
+
+logging.basicConfig(level=logging.DEBUG)
 
 # FastAPI backend
 app = FastAPI()
