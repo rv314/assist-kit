@@ -26,7 +26,7 @@ class ChromaVectorStore():
     self.collection = self.client.get_or_create_collection(name=collection_name)
 
 
-  # Add documents function: Used by RAG pipeline and Chat Engine
+  # Add documents function: Used by RAG pipeline
   def add_documents(self, chunks: list[dict]):
     """
     Accepts list of chunks: 
@@ -34,18 +34,29 @@ class ChromaVectorStore():
       "text": ...,
       "metadata": {...}}, ...]
     """
+    print(f"Received Text: {chunks}")
     ids = [chunk["id"] for chunk in chunks]
     texts = [chunk["text"] for chunk in chunks]
-    embeddings = [self.embedder.embed_query(text) for text in texts]
+    embeddings = []
+    for text in texts:
+      emb = self.embedder.embed_query(text)
+      embeddings.append(emb)
     metadatas = [chunk.get("metadata", {}) for chunk in chunks]
 
-    # Remove duplicates
+    self.collection.add(documents=texts, ids=ids, embeddings=embeddings, metadatas=metadatas)
+
+    # TODO: Below code is a bug, needs investigation to fix
+    """
+    Can be format issue, also its better to have deduplication done using text-based hashing
+    instead of id-based
+    """
+    """ # Remove duplicates
     existing_ids = self.collection.get(include=["documents"]).get("ids", [])
     new_chucks = [(i, t, e, m) for i, t, e, m in zip(ids, texts, embeddings, metadatas) if i not in existing_ids]
 
     if new_chucks:
        ids, texts, embeddings, metadatas = zip(*new_chucks)
-       self.collection.add(documents=texts, ids=ids, embeddings=embeddings, metadatas=metadatas)
+       self.collection.add(documents=texts, ids=ids, embeddings=embeddings, metadatas=metadatas) """
 
   
   def similarity_search(self, query: str, top_k: int = 3, similarity_threshold: float = 0.3):
