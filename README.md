@@ -48,7 +48,7 @@ User → FastAPI (api/chat or api/rag)
 ## 📁 Folder Structure (WIP)
 ```bash
 |-- api
-|   `-- chat.py
+|   |-- chat.py
 |-- core
 |   |-- __init__.py
 |   |-- agents
