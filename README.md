@@ -14,7 +14,7 @@ Built with extensibility in mind, it supports multiple use cases:
 - 📄 **RAG Pipeline** for PDF, website, or custom document Q&A
 - 🧩 Plugin-style architecture for future tools like Web Search, SQL Agent, etc.
 - 🔗 Pluggable registries for LLMs, Embedders, and Vector DBs
-- 🖥️ **NiceGUI Frontend**: Clean UI layer for interacting with AssistKit via web browser
+- 🖥️ **NiceGUI Frontend**: Clean UI layer for interacting with AssistKit via web browser (Planning to switch to Next.js or other framework in future)
 
 ---
 
@@ -91,8 +91,8 @@ User → FastAPI (api/chat or api/rag)
 - ✅ RAG Engine using uploaded files or web-scraped content
 - 🗂 Pluggable storage backends (JSON → Redis/PostgreSQL)
 - 🧾 PDF and Web QA pipelines
-- 🔍 Web Search Agent / Other Agents
-- MCP
+- 🔍 Web Search Agent / Other Agents / Agent Design Patterns
+- Model Context Protocol (MCP)
 - ☁️ Deployable Dockerfile and Installation Guide
 
 ## Research (Planning to include) 
