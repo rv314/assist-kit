@@ -31,14 +31,14 @@ Built with extensibility in mind, it supports multiple use cases:
 ---
 
 ## 🧠 Architecture
-
+```bash
 User → FastAPI (api/chat or api/rag)
 → Orchestrator (InteractionEngine)
 ├─ get_llm() from llm_registry
 ├─ get_embedder() from embedding_registry
 ├─ get_vector_db() from vector_registry
 └─ vector_store → stores/queries via embeddings
-
+```
 - **ChatEngine**: Current base class in orchestrator; will be subclassed by `RAGEngine`, `WebSearchEngine`, etc.
 - **Embeddings & LLMs**: Abstracted behind registries for easy swapping
 - **Collections**: Support for multiple vector DB collections (e.g., `chat_logs`, `rag_docs`)
@@ -90,9 +90,18 @@ User → FastAPI (api/chat or api/rag)
 
 - ✅ RAG Engine using uploaded files or web-scraped content
 - 🗂 Pluggable storage backends (JSON → Redis/PostgreSQL)
-- 🔍 Web Search Agent
 - 🧾 PDF and Web QA pipelines
+- 🔍 Web Search Agent / Other Agents
+- MCP
 - ☁️ Deployable Dockerfile and Installation Guide
+
+## Research (Planning to include) 
+
+- Knowledge Graph (Neo4j or other Open Source)
+
+## Use Cases
+
+Idea to build this framework is to re-utilize it for various purposes / use-cases. Currently focusing on building the foundations.
 
 ---
 
