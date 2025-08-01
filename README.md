@@ -62,26 +62,26 @@ User → FastAPI (api/chat or api/rag)
 |   |-- registries
 |   |-- session_backends
 |   |-- utils
-|   `-- vector_backends
+|   |-- vector_backends
 |-- documents
 |   |-- examples
 |   |-- processed
-|   `-- uploads
+|   |-- uploads
 |-- main.py
 |-- session_data
-|   `-- session_data.json
+|   |-- session_data.json
 |-- tests
 |   |-- __init__.py
 |   |-- test_chat_client.py
 |   |-- test_token_utils.py
-|   `-- test_vectorstore.py
+|   |-- test_vectorstore.py
 |-- ui
 |   |-- __init__.py
 |   |-- components
 |   |-- main.py
-|   `-- pages
-`-- vectors
-    `-- chroma
+|   |-- pages
+|-- vectors
+    |-- chroma
 ```
 
 ---
